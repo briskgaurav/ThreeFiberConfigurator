@@ -43,7 +43,7 @@ function Model({ color, Visible, Wheels, color2 }) {
         x: 45,
         y: 0,
         z: 40,
-        delay: 0.3,
+        delay: 0.1,
         duration: 2,
         ease: Expo.easeInOut,
       });
@@ -52,7 +52,7 @@ function Model({ color, Visible, Wheels, color2 }) {
         x: -30,
         y: 0,
         z: 10,
-        delay: 0.3,
+        delay: 0.1,
         duration: 2,
         ease: Expo.easeInOut,
       });

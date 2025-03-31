@@ -157,7 +157,7 @@ function App() {
             );
           })}
         </div>
-        <div className=" flex-wrap wheels flex items-center justify-center top-[-1%] left-[92%] md:left-1/2 md:-translate-x-1/2 p-4 gap-2 border z-10 rounded-xl  bg-black-500/10 border-black/50 absolute -translate-y-[100%]">
+        <div className=" flex-wrap wheels flex items-center justify-center top-[-1%] left-[80%] md:left-1/2 md:-translate-x-1/2 p-4 gap-2 border z-10 rounded-xl  bg-black-500/10 border-black/50 absolute -translate-y-[100%]">
           {glassColors.map((item, index) => {
             return (
               <div

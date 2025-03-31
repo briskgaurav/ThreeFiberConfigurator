@@ -61,7 +61,7 @@ function Model({ color, Visible, Wheels, color2 }) {
         x: 0,
         y: 0,
         z: 40,
-        delay: 4.5,
+        delay: .3,
         duration: 2,
         ease: Expo.easeInOut,
       });

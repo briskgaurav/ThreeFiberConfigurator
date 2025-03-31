@@ -25,6 +25,11 @@ function App() {
       duration: 1,
       ease: Expo.easeInOut,
     });
+    tl.from(".model", {
+     opacity: 0,
+      duration: .2,
+      ease: Expo.easeInOut,
+    });
     tl.from(".buttons", {
       opacity: 0,
       duration: 0.5,
@@ -61,32 +66,34 @@ function App() {
     }
   };
   const toggleExtras = () => {
-    if (Wheels) {
-      gsap.to(".wheels", {
-        y: "-100%",
-        duration: 1.5,
-        ease: Expo.easeIn,
-      });
-      gsap.to(".heading", {
-        y: 0,
-        opacity: 1,
-        duration: 1.5,
-        ease: Expo.easeIn,
-      });
-      setWheels(false);
-    } else {
-      gsap.to(".wheels", {
-        y: "0%",
-        duration: 1.5,
-        ease: Expo.easeOut,
-      });
-      gsap.to(".heading", {
-        y: -100,
-        opacity: 0,
-        duration: 1.5,
-        ease: Expo.easeOut,
-      });
-      setWheels(true);
+    if (!Visible) {
+      if (Wheels) {
+        gsap.to(".wheels", {
+          y: "-100%",
+          duration: 1.5,
+          ease: Expo.easeIn,
+        });
+        gsap.to(".heading", {
+          y: 0,
+          opacity: 1,
+          duration: 1.5,
+          ease: Expo.easeIn,
+        });
+        setWheels(false);
+      } else {
+        gsap.to(".wheels", {
+          y: "0%",
+          duration: 1.5,
+          ease: Expo.easeOut,
+        });
+        gsap.to(".heading", {
+          y: -100,
+          opacity: 0,
+          duration: 1.5,
+          ease: Expo.easeOut,
+        });
+        setWheels(true);
+      }
     }
   };
   return (
@@ -122,17 +129,23 @@ function App() {
           </p>
         </div>
         <div
-          onClick={() => toggleExtras()}
+          onClick={() => {
+            if (!Visible) {
+              toggleExtras();
+            }
+          }}
           className={`absolute buttons left-1/2 md:-translate-x-0 translate-x-[20%] md:left-[5%] md:top-[22%] top-[75%] ${
             Wheels ? "opacity-80" : "opacity-40"
-          } px-12 py-5 z-30 flex items-center justify-center border rounded-lg`}
+          } ${
+            Visible && "bg-zinc-600 text-white" 
+          } px-12 py-5 z-30 flex items-center justify-center  border rounded-lg`}
         >
           <p
             className={`font-thin text-sm uppercase ${
               Wheels ? "bg-white" : "bg-transparent"
             } absolute cursor-pointer `}
           >
-            {Wheels ? "<-" : "Others"}
+            {Wheels ? "<-" : Visible ? "Disabled" : "Extras"}
           </p>
         </div>
 

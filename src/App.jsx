@@ -17,7 +17,7 @@ function App() {
     tl.to(nav.current, {
       y: "0%",
       duration: 0.5,
-      delay:4.8,
+      delay: 4.8,
       ease: Expo.easeInOut,
     });
     tl.from(".heading", {
@@ -95,20 +95,21 @@ function App() {
       <div className="w-full h-full">
         <nav
           ref={nav}
-          className="absolute navbar pt-10 px-10 w-full flex items-center justify-end uppercase font-regular -translate-y-[100%] text-black left-1/2 -translate-x-1/2 "
+          className="absolute navbar pt-10 md:px-10 w-full flex items-center justify-end uppercase font-regular -translate-y-[100%] text-black left-1/2 -translate-x-1/2 "
         >
           <div className="flex items-center mx-10 pb-2 justify-between w-full">
-            <div className="flex items-center gap-2 justify-self-end opacity-50 ">
+            <div className="md:flex hidden items-center gap-2 justify-self-end opacity-50 ">
               <p className="w-6 h-6 rounded-full cursor-pointer border-3 "></p>
               <p className="w-4 h-4 rounded-full cursor-pointer border"></p>
               <p className="w-4 h-4 rounded-full cursor-pointer border"></p>
             </div>
-              <h2 className="tracking-[1vw] opacity-70">Chevrolet</h2>
+            <h2 className="md:tracking-[1vw] opacity-70">Chevrolet</h2>
           </div>
         </nav>
+
         <div
           onClick={() => toggleColorPallete()}
-          className={`absolute buttons left-[5%] top-[15%] ${
+          className={`absolute buttons md:left-[5%] left-1/2 -translate-x-[110%] md:-translate-x-0 top-[75%] md:top-[15%] ${
             Visible ? "opacity-80" : "opacity-40"
           } px-12 py-5 z-30 flex items-center justify-center border rounded-lg`}
         >
@@ -122,7 +123,7 @@ function App() {
         </div>
         <div
           onClick={() => toggleExtras()}
-          className={`absolute buttons left-[5%] top-[22%] ${
+          className={`absolute buttons left-1/2 md:-translate-x-0 translate-x-[20%] md:left-[5%] md:top-[22%] top-[75%] ${
             Wheels ? "opacity-80" : "opacity-40"
           } px-12 py-5 z-30 flex items-center justify-center border rounded-lg`}
         >
@@ -135,46 +136,45 @@ function App() {
           </p>
         </div>
 
-        <div className="absolute left-1/2 opacity-80 top-1/2 -translate-y-1/2 -translate-x-1/2 w-full overflow-hidden">
+        <div className="absolute left-1/2 opacity-80 top-[25%] md:top-1/2 md:-translate-y-1/2 -translate-x-1/2 w-full overflow-hidden">
           <h1
-            className="text-[15vw] heading font-bold text-center tracking-tight 
+            className="md:text-[15vw] text-6xl heading font-bold text-center tracking-tight 
              bg-gradient-to-b from-zinc-900 to-white bg-clip-text text-transparent leading-none "
           >
             CAMARO ZL
           </h1>
         </div>
 
-        <div className="w-full flex-wrap flex items-center justify-center ColorPallate bottom-[0%] translate-y-[100px] right-0 h-[10%] p-4 gap-2 border z-10  backdrop-blur-xl bg-black-500/10 border-black/50 shadow-lg absolute">
-          <h6>Choose Your Color</h6>
+        <div className="w-[90%] flex-wrap flex items-center justify-center ColorPallate bottom-[0%] translate-y-[100px] right-0 h-[12%] p-4 gap-2 border z-10  backdrop-blur-xl left-1/2 rounded-t-xl -translate-x-1/2 bg-black-500/10 border-black/50 shadow-lg absolute">
           {colors.map((item, index) => {
             return (
-              <>
-                <div
-                  key={index}
-                  onClick={() => setColor(item.hex)}
-                  style={{ background: item.hex }}
-                  className="w-[8%] h-[100%] cursor-pointer opacity-60 rounded-tr-2xl rounded-bl-2xl border  flex items-center justify-center"
-                ></div>
-              </>
+              <div
+                key={item.name}
+                onClick={() => setColor(item.hex)}
+                style={{ background: item.hex }}
+                className="md:w-[8%] w-12 h-8 md:h-[100%] cursor-pointer opacity-60 rounded-tr-2xl rounded-bl-2xl border  flex items-center justify-center"
+              ></div>
             );
           })}
         </div>
-        <div className=" flex-wrap wheels flex items-center justify-center top-[-1%] left-1/2 -translate-x-1/2 p-4 gap-2 border z-10 rounded-xl  bg-black-500/10 border-black/50 absolute -translate-y-[100%]">
-        
+        <div className=" flex-wrap wheels flex items-center justify-center top-[-1%] left-[92%] md:left-1/2 md:-translate-x-1/2 p-4 gap-2 border z-10 rounded-xl  bg-black-500/10 border-black/50 absolute -translate-y-[100%]">
           {glassColors.map((item, index) => {
             return (
-              <>
-                <div
-                  key={index}
-                  onClick={() => setColor2(item.hex)}
-                  style={{ background: item.hex }}
-                  className="w-12  h-12 cursor-pointer opacity-60 rounded-tr-2xl rounded-bl-2xl border  flex items-center justify-center"
-                ></div>
-              </>
+              <div
+                key={index}
+                onClick={() => setColor2(item.hex)}
+                style={{ background: item.hex }}
+                className="md:w-12 w-12 h-8  md:h-12 cursor-pointer opacity-60 rounded-tr-2xl rounded-bl-2xl border  flex items-center justify-center"
+              ></div>
             );
           })}
         </div>
-        <Experience Visible={Visible} Wheels={Wheels} color2={color2} color={color} />
+        <Experience
+          Visible={Visible}
+          Wheels={Wheels}
+          color2={color2}
+          color={color}
+        />
       </div>
     </>
   );

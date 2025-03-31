@@ -1,29 +1,53 @@
 import { useGSAP } from "@gsap/react";
 import { useGLTF } from "@react-three/drei";
 import { useThree } from "@react-three/fiber";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import * as THREE from "three";
 import gsap, { Expo } from "gsap";
 
-function Model({ color, Visible , Wheels, color2}) {
+function Model({ color, Visible, Wheels, color2 }) {
   const data = useGLTF("/hot.glb");
   const { nodes, materials, scene } = data;
-  // console.log(data);
-
+  const [carscale, setCarScale] = useState(0.5);
   const { camera } = useThree();
+  const width = window.innerWidth;
+
+  let ResponsivePositionY = 0;
+  if (width < 600) {
+    ResponsivePositionY = -0.2;
+  }
+  if (width <= 1024) {
+    ResponsivePositionY = -0.2;
+  } else {
+    ResponsivePositionY = -1;
+  }
+
+  const getCarScale = () => {
+    const width = window.innerWidth;
+    if (width < 600) return 0.4;
+    if (width <= 1024) return 0.5; // Tablet
+    return 1; // Desktop
+  };
+
+  useEffect(() => {
+    const updateScale = () => setCarScale(getCarScale());
+
+    updateScale();
+    window.addEventListener("resize", updateScale);
+    return () => window.removeEventListener("resize", updateScale);
+  }, []);
 
   useGSAP(() => {
     if (Visible) {
       gsap.to(camera.position, {
         x: 45,
         y: 0,
-        z:40,
+        z: 40,
         delay: 0.3,
         duration: 2,
         ease: Expo.easeInOut,
       });
-    } 
-    else if(Wheels){
+    } else if (Wheels) {
       gsap.to(camera.position, {
         x: -30,
         y: 0,
@@ -32,13 +56,12 @@ function Model({ color, Visible , Wheels, color2}) {
         duration: 2,
         ease: Expo.easeInOut,
       });
-    }
-     else {
+    } else {
       gsap.to(camera.position, {
         x: 0,
         y: 0,
         z: 40,
-        delay: 0.3,
+        delay: 4.5,
         duration: 2,
         ease: Expo.easeInOut,
       });
@@ -47,8 +70,9 @@ function Model({ color, Visible , Wheels, color2}) {
 
   return (
     <group
-      position={[0, -1, 0]}
+      position={[0, ResponsivePositionY, 0]}
       rotation={[-Math.PI / 2, 0, THREE.MathUtils.degToRad(-120)]}
+      scale={[carscale, carscale, carscale]}
       castShadow
     >
       {/* Interior */}

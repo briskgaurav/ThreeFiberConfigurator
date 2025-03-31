@@ -45,14 +45,14 @@ function Splash() {
       <div className="w-screen splash h-screen z-[999] flex items-center justify-center absolute bg-zinc-900">
         <div className="w-full h-full flex-col gap-2 flex justify-center items-center">
           <div>
-            <h1 className="text-right text-3xl tracking-widest text-sky-200 font-thin">
+            <h1 className="text-right text-xl md:text-3xl tracking-widest text-sky-200 font-thin shadow-sm ">
               {progress}%
             </h1>
           </div>
-          <div className="h-[2px] bg-zinc-300 w-[90%] rounded-full">
+          <div className="md:h-[2px] h-[1px] bg-zinc-300 w-[90%] rounded-full">
             <div
               ref={loading}
-              className="h-[2px] loading bg-blue-200 rounded-full"
+              className="md:h-[2px] h-[1px] loading bg-blue-200 shadow-sky-600 blur-xs rounded-full"
             >
               {" "}
             </div>

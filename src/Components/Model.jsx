@@ -2,15 +2,16 @@ import { useGLTF } from "@react-three/drei";
 import React from "react";
 import * as THREE from "three";
 
-function Model({color}) {
+function Model({ color }) {
   const data = useGLTF("/hot.glb");
   const { nodes, materials, scene } = data;
   console.log(data);
+  
 
   return (
     <group
       position={[0, -1, 0]}
-      rotation={[-Math.PI / 2, 0, -Math.PI]}
+      rotation={[-Math.PI/2, 0,THREE.MathUtils.degToRad(-160)]}
       castShadow
     >
       {/* Interior */}
@@ -40,8 +41,8 @@ function Model({color}) {
         <meshStandardMaterial
           {...nodes.Object_4.material}
           color={color}
-          metalness={0}
-          roughness={0.6}
+          metalness={0.8}
+          roughness={0.5}
           side={THREE.DoubleSide}
         />
       </mesh>

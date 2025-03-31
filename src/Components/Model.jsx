@@ -1,11 +1,49 @@
+import { useGSAP } from "@gsap/react";
 import { useGLTF } from "@react-three/drei";
+import { useThree } from "@react-three/fiber";
 import React from "react";
 import * as THREE from "three";
+import gsap, { Expo } from "gsap";
 
-function Model({ color }) {
+function Model({ color, Visible , Wheels, color2}) {
   const data = useGLTF("/hot.glb");
   const { nodes, materials, scene } = data;
-  console.log(data);
+  // console.log(data);
+
+  const { camera } = useThree();
+
+  useGSAP(() => {
+    if (Visible) {
+      gsap.to(camera.position, {
+        x: 45,
+        y: 0,
+        z:40,
+        delay: 0.3,
+        duration: 2,
+        ease: Expo.easeInOut,
+      });
+    } 
+    else if(Wheels){
+      gsap.to(camera.position, {
+        x: -30,
+        y: 0,
+        z: 10,
+        delay: 0.3,
+        duration: 2,
+        ease: Expo.easeInOut,
+      });
+    }
+     else {
+      gsap.to(camera.position, {
+        x: 0,
+        y: 0,
+        z: 40,
+        delay: 0.3,
+        duration: 2,
+        ease: Expo.easeInOut,
+      });
+    }
+  }, [Visible, camera, Wheels]);
 
   return (
     <group
@@ -31,7 +69,7 @@ function Model({ color }) {
         <meshStandardMaterial
           {...nodes.Object_3.material}
           roughness={0.5}
-          metalness={1  }
+          metalness={1}
           side={THREE.DoubleSide}
         />
       </mesh>
@@ -60,7 +98,7 @@ function Model({ color }) {
         geometry={nodes.Object_5.geometry}
         material={nodes.Object_5.material}
       >
-        <meshStandardMaterial color={"#666"} metalness={0.9} roughness={0.3} />
+        <meshStandardMaterial color={color2} metalness={0.9} roughness={0.3} />
       </mesh>
 
       {/* WHEELS RUBBER */}
@@ -86,7 +124,7 @@ function Model({ color }) {
         material={nodes.Object_7.material}
       >
         <meshPhysicalMaterial
-          color={"#222"}
+          color={color2}
           metalness={1}
           roughness={0.05}
           transmission={0.6}

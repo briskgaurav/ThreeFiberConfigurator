@@ -3,9 +3,10 @@ import { Canvas } from "@react-three/fiber";
 import React from "react";
 import Model from "./Model";
 
-function Experience({ color }) {
+function Experience({ color, Visible, Wheels,color2 }) {
+    
   return (
-    <Canvas flat shadows camera={{ fov: 12, position: [0, 0, 20] }}>
+    <Canvas flat shadows camera={{ fov: 5, position: [0, 0, 30] }}>
       <OrbitControls
         enableDamping
         enableZoom={false}
@@ -13,7 +14,8 @@ function Experience({ color }) {
         maxPolarAngle={Math.PI - Math.PI / 2}
       />
       <Environment files={"/hdri.hdr"} />
-      <Model color={color} />
+      
+      <Model Wheels={Wheels} color2={color2} Visible={Visible} color={color} />
     </Canvas>
   );
 }

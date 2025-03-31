@@ -11,18 +11,32 @@ import {
 } from "@react-three/postprocessing";
 
 function Experience({ color, Visible, Wheels, color2 }) {
+  const width = window.innerWidth;
+  let ResponsivePositionY = 0;
+  if (width < 600) {
+    ResponsivePositionY = -0.2;
+  }
+  if (width <= 1024) {
+    ResponsivePositionY = -0.2;
+  } else {
+    ResponsivePositionY = -1;
+  }
   return (
-    <Canvas className="model" flat shadows camera={{ fov: 5, position: [0, 0, 30] }}>
+    <Canvas
+      className="model"
+      flat
+      shadows
+      camera={{ fov: 5, position: [0, 0, 30] }}
+    >
       <EffectComposer>
         <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={500} />
         <Noise opacity={0.02} />
         <Vignette eskil={false} offset={0.1} darkness={1.1} />
       </EffectComposer>
-      <group position={[0, -1, 0]}>
+      <group position={[0, ResponsivePositionY, 0]}>
         <ContactShadows scale={10} opacity={0.2} blur={1} />
       </group>
       <Environment files={"/hdri.hdr"} />
-
 
       <Model Wheels={Wheels} color2={color2} Visible={Visible} color={color} />
       <OrbitControls
